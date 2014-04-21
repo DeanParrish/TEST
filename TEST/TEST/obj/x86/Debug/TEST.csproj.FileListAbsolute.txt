@@ -1,0 +1,4 @@
+C:\Users\Parrish\Documents\Class\Old Classes\C#\TEST\TEST\bin\Debug\TEST.exe
+C:\Users\Parrish\Documents\Class\Old Classes\C#\TEST\TEST\bin\Debug\TEST.pdb
+C:\Users\Parrish\Documents\Class\Old Classes\C#\TEST\TEST\obj\x86\Debug\TEST.exe
+C:\Users\Parrish\Documents\Class\Old Classes\C#\TEST\TEST\obj\x86\Debug\TEST.pdb
