@@ -9,9 +9,9 @@ namespace TEST
         public List<int> lstMultiples = new List<int>();
 		public int end;
         
-		public ListMethods(string endNum)
+		public ListMethods(string input)
 		{
-			int.TryParse(endNum, out end);
+			int.TryParse(input, out end);
 		}
         //FILLS SELECTED LIST WITH NUMBER UP TO USER SELECTED END
         public void ConstructList(List<int> list)
@@ -31,26 +31,7 @@ namespace TEST
 
         }
 
-		public void ConstructFibonacci(List<int> lst)
-        {
-			int sum;
-			if (end > 0)
-            {
-                for (int i = 1; i <= 2; i++)
-                {
-					lst.Add(i);
-                }
-
-				do {
-					sum = lst[lst.Count-2] + lst[lst.Count-1];
-					if (sum < end) {
-						lst.Add(sum);
-					}
-
-					} while (sum < end);
-            }
-        }
-		//DISPLAYES SELECTED <INT>LIST
+		//DISPLAYS SELECTED <INT>LIST
 		public void DisplayList(List<int> lst)
         {
 			foreach (var item in lst) {

@@ -9,9 +9,14 @@ namespace TEST
         {
 
             Console.WriteLine("Enter length of list");
-			ListMethods test = new ListMethods (Console.ReadLine().ToString ());
+			FibonacciList test = new FibonacciList (Console.ReadLine().ToString ());
 			test.ConstructFibonacci (test.lstNums);
+			test.AddMultipleToList (test.lstNums, test.lstMultiples, 2);
+			test.DisplayList (test.lstMultiples);
+			Console.WriteLine ("");
 			test.DisplayList (test.lstNums);
+			Console.WriteLine ("");
+			Console.WriteLine (test.GetListSum(test.lstMultiples));
 			//Console.WriteLine(test.end.ToString());
 			//test.ConstructFibonacci(test.lstNums, Console.ReadLine());
             //test.ConstructList(test.lstNums, Console.ReadLine());
