@@ -1,0 +1,4 @@
+C:\Users\Gene\Documents\GitHub\TEST\GitMonoTest\GitMonoTest\bin\Debug\GitMonoTest.exe
+C:\Users\Gene\Documents\GitHub\TEST\GitMonoTest\GitMonoTest\bin\Debug\GitMonoTest.pdb
+C:\Users\Gene\Documents\GitHub\TEST\GitMonoTest\GitMonoTest\obj\x86\Debug\GitMonoTest.exe
+C:\Users\Gene\Documents\GitHub\TEST\GitMonoTest\GitMonoTest\obj\x86\Debug\GitMonoTest.pdb

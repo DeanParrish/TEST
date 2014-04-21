@@ -9,13 +9,18 @@ namespace TEST
     {
         public List<int> lstNums = new List<int>();
         public List<int> lstMultiples = new List<int>();
+		public int end;
         
+		public ListMethods(string num)
+		{
+			int.TryParse(num, out end);
+		}
         //FILLS SELECTED LIST WITH NUMBER UP TO USER SELECTED END
-        public void ConstructList(List<int> list, string input)
+        public void ConstructList(List<int> list)
         {
-            int end;
+			//int end;
 
-            if (int.TryParse(input, out end))
+			if (end > 0)
             {
                 for (int i = 1; i < end; i++)
                 {
@@ -30,11 +35,11 @@ namespace TEST
 
         }
 
-        public void ConstructFibonacci(List<int> list, string input)
+        public void ConstructFibonacci(List<int> list)
         {
-            int end;
+			//int end;
 
-            if (int.TryParse(input, out end))
+			if (end > 0)
             {
                 for (int i = 1; i <= 2; i++)
                 {
@@ -49,7 +54,7 @@ namespace TEST
             }
         }
         //DISPLAYES SELECTED LIST
-        private void DisplayList(List<int> list)
+		public void DisplayList(List<int> list)
         {
             for (int i = 0; i < list.Count; i++)
             {

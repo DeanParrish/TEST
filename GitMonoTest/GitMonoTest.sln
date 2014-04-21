@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitMonoTest", "GitMonoTest\GitMonoTest.csproj", "{4028CD20-B7F9-4A23-AB95-46699992B6B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4028CD20-B7F9-4A23-AB95-46699992B6B7}.Debug|x86.ActiveCfg = Debug|x86
+		{4028CD20-B7F9-4A23-AB95-46699992B6B7}.Debug|x86.Build.0 = Debug|x86
+		{4028CD20-B7F9-4A23-AB95-46699992B6B7}.Release|x86.ActiveCfg = Release|x86
+		{4028CD20-B7F9-4A23-AB95-46699992B6B7}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = GitMonoTest\GitMonoTest.csproj
+	EndGlobalSection
+EndGlobal
