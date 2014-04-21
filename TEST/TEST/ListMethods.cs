@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace TEST
 {
@@ -11,15 +9,13 @@ namespace TEST
         public List<int> lstMultiples = new List<int>();
 		public int end;
         
-		public ListMethods(string num)
+		public ListMethods(string endNum)
 		{
-			int.TryParse(num, out end);
+			int.TryParse(endNum, out end);
 		}
         //FILLS SELECTED LIST WITH NUMBER UP TO USER SELECTED END
         public void ConstructList(List<int> list)
         {
-			//int end;
-
 			if (end > 0)
             {
                 for (int i = 1; i < end; i++)
@@ -35,31 +31,31 @@ namespace TEST
 
         }
 
-        public void ConstructFibonacci(List<int> list)
+		public void ConstructFibonacci(List<int> lst)
         {
-			//int end;
-
+			int sum;
 			if (end > 0)
             {
                 for (int i = 1; i <= 2; i++)
                 {
-                    list.Add(i);
+					lst.Add(i);
                 }
 
-                for (int i = 0; i < end; i++)
-                {
-                    int add = list[list.Count-1] + list[list.Count];
-                    list.Add(add);
-                }
+				do {
+					sum = lst[lst.Count-2] + lst[lst.Count-1];
+					if (sum < end) {
+						lst.Add(sum);
+					}
+
+					} while (sum < end);
             }
         }
-        //DISPLAYES SELECTED LIST
-		public void DisplayList(List<int> list)
+		//DISPLAYES SELECTED <INT>LIST
+		public void DisplayList(List<int> lst)
         {
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine(list[i].ToString());
-            }
+			foreach (var item in lst) {
+				Console.WriteLine (item.ToString());
+			}
         }
 
         //ADDS MULTIPLES OF CERTAIN NUMBER FROM ONE LIST TO ANOTHER LIST

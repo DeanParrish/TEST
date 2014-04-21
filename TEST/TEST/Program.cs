@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace TEST
 {
@@ -11,10 +9,10 @@ namespace TEST
         {
 
             Console.WriteLine("Enter length of list");
-			ListMethods test = new ListMethods (Console.Read ().ToString ());
-			test.ConstructList (test.lstNums);
+			ListMethods test = new ListMethods (Console.ReadLine().ToString ());
+			test.ConstructFibonacci (test.lstNums);
 			test.DisplayList (test.lstNums);
-			Console.WriteLine(test.end.ToString());
+			//Console.WriteLine(test.end.ToString());
 			//test.ConstructFibonacci(test.lstNums, Console.ReadLine());
             //test.ConstructList(test.lstNums, Console.ReadLine());
             //test.AddMultipleToList(test.lstNums, test.lstMultiples, 2);
