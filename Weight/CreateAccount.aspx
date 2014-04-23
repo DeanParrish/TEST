@@ -38,8 +38,8 @@
                 <td><asp:TextBox ID="txtHeightInch" runat="server" /></td>
             </tr>
             <tr>
-                <td><asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" CausesValidation="False" /></td>
-                <td><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CausesValidation="true" /></td>
+                <td><asp:Button ID="btnReset" runat="server" Text="Cancel" OnClick="btnReset_Click" CausesValidation="False" /></td>
+                <td><asp:Button ID="btnSubmit" runat="server" Text="Sign Up" OnClick="btnSubmit_Click" CausesValidation="true" /></td>
             </tr>
         </table>
 

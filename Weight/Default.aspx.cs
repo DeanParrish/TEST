@@ -11,4 +11,13 @@ public partial class _Default : System.Web.UI.Page
     {
 
     }
+    protected void btnReset_Click(object sender, EventArgs e)
+    {
+        txtEMail.Text = "";
+        txtPassword.Text = "";
+    }
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Hub.aspx");
+    }
 }
