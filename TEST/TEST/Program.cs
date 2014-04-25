@@ -40,7 +40,7 @@ namespace TEST
 
             CurrencyConversion CurrConv = new CurrencyConversion(50.00m);
             Console.WriteLine(CurrConv.ConvertUSDToEUR(CurrConv.deciAmount));
-            Console.WriteLine(CurrConv.ConvertPesoToUSD(CurrConv.deciAmount));
+            //Console.WriteLine(CurrConv.ConvertPesoToUSD(CurrConv.deciAmount));
 
             Console.Read();
         }

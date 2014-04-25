@@ -10,7 +10,7 @@ namespace TEST
     class CurrencyConversion
     {
         public decimal deciAmount { get; set; }
-        XDocument xmlDoc = XDocument.Load("~/Data/ExchangeRates.xml");
+        XDocument xmlDoc = XDocument.Load("C:/Users/Gene/Documents/GitHub/TEST/TEST/TEST/Data/ExchangeRates.xml");
         
 
         public CurrencyConversion(decimal amt)
@@ -23,18 +23,19 @@ namespace TEST
             try
             {
                 decimal deciEUR = 0;
-                IEnumerable<decimal> deciRate = from rate in xmlDoc.Root.Elements("Cube")
-                                   where (string)rate.Attribute("currency") == "USD"
-                                   select (decimal)rate.Attribute("rate");
+                IEnumerable<decimal> GetDeciRate = from rate in xmlDoc.Descendants("Cube")
+                                   where (string)rate.Attribute("currency").Value == "USD"
+                                   select (decimal)rate;
+                decimal deciRate = GetDeciRate.First<decimal>();
 
-                deciEUR = amt * decimal.Parse(deciRate);
+                deciEUR = amt * deciRate;
 
                 return Math.Round(deciEUR, 2);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                throw;
+                return 0;
             }
             
         }
