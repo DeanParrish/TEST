@@ -44,10 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrencyConversion.cs" />
+    <Compile Include="DTResults.cs" />
+    <Compile Include="MathProbs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ListMethods.cs" />
     <Compile Include="FibonacciList.cs" />
+    <Compile Include="StringIterator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\ExchangeRates.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
