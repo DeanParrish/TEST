@@ -5,17 +5,34 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
+
 namespace TEST
 {
     class CurrencyConversion
     {
         public decimal deciAmount { get; set; }
-        XDocument xmlDoc = XDocument.Load("C:/Users/Gene/Documents/GitHub/TEST/TEST/TEST/Data/ExchangeRates.xml");
+        XDocument xmlDoc = XDocument.Load("../../Data/ExchangeRates.xml");
         
 
+        //GETS RATE OF EURO TO CALLED CURRENCY && ALL CREDIT TO ECB
+        private decimal QueryBuilder(string curr)
+        {
+            decimal retValue = 0;
+            var GetDeciRate = from todayDate in xmlDoc.Descendants("Cube")
+                              where (string)todayDate.Attribute("currency") == curr
+                              select todayDate.Attribute("rate").Value;
+
+            foreach (var item in GetDeciRate)
+            {
+                retValue = decimal.Parse(item);
+            }
+
+            return retValue;
+        }
         public CurrencyConversion(decimal amt)
         {
             deciAmount = amt;
+            
         }
 
         public decimal ConvertUSDToEUR(decimal amt)
@@ -23,14 +40,13 @@ namespace TEST
             try
             {
                 decimal deciEUR = 0;
-                IEnumerable<decimal> GetDeciRate = from rate in xmlDoc.Descendants("Cube")
-                                   where (string)rate.Attribute("currency").Value == "USD"
-                                   select (decimal)rate;
-                decimal deciRate = GetDeciRate.First<decimal>();
+                decimal deciRate = QueryBuilder("USD");
 
-                deciEUR = amt * deciRate;
+                deciEUR = amt * (1 / deciRate);
 
                 return Math.Round(deciEUR, 2);
+                
+
             }
             catch (Exception e)
             {
@@ -45,7 +61,7 @@ namespace TEST
             try
             {
                 decimal deciUSD = 0;
-                decimal deciRate = 1.38m;
+                decimal deciRate = QueryBuilder("USD");
 
                 deciUSD = amt * deciRate;
 
@@ -55,43 +71,118 @@ namespace TEST
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                throw;
+                return 0;
+                
             }
         }
 
-        public decimal ConcertUSDToPeso(decimal amt)
+        public decimal ConcertUSDToMXN(decimal amt)
         {
             try
             {
                 decimal deciPeso;
-                decimal deciRate = 13.13m;
-
-                deciPeso = amt * deciRate;
+                decimal deciRate = QueryBuilder("USD");
+ 
+                deciPeso = (amt * (QueryBuilder("MXN")*(1 / deciRate)));
 
                 return Math.Round(deciPeso, 2);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                throw;
+                return 0;
             }
         }
 
-        public decimal ConvertPesoToUSD(decimal amt)
+        public decimal ConvertMXNToUSD(decimal amt)
         {
             try
             {
                 decimal deciUSD;
-                decimal deciRate = .08m;
+                decimal deciRate = QueryBuilder("USD");
 
-                deciUSD = amt * deciRate;
+                deciUSD = amt / (QueryBuilder("MXN")*(1/deciRate));
 
                 return Math.Round(deciUSD, 2);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                throw;
+                return 0;
+            }
+        }
+
+        public decimal ConvertEURToJPY(decimal amt)
+        {
+            try
+            {
+                decimal deciJPY;
+                decimal deciRate = QueryBuilder("JPY");
+
+                deciJPY = amt * deciRate;
+
+                return Math.Round(deciJPY, 2);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 0;
+               
+            }
+        }
+
+        public decimal ConvertJPYToEUR(decimal amt)
+        {
+            try
+            {
+                decimal deciEUR;
+                decimal deciRate = QueryBuilder("JPY");
+
+                deciEUR = amt / deciRate;
+
+                return Math.Round(deciEUR, 2);
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return 0;
+            }
+        }
+
+        public decimal ConvertUSDToJPY(decimal amt)
+        {
+            try
+            {
+                decimal deciJPY;
+                decimal deciRate = QueryBuilder("JPY");
+
+                deciJPY = (amt * (1 / QueryBuilder("USD"))) * deciRate;
+
+                return Math.Round(deciJPY, 2);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 0;
+            }
+        }
+
+        public decimal ConvertJPYToUSD(decimal amt)
+        {
+            try
+            {
+                decimal deciUSD;
+                decimal deciRate = QueryBuilder("USD");
+
+                deciUSD = (amt * (1 / QueryBuilder("JPY")) * deciRate);
+
+                return Math.Round(deciUSD, 2);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 0;
             }
         }
     }

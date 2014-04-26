@@ -1,0 +1,4 @@
+C:\Users\Parrish\Documents\GitHub\TEST\TEST\TEST\bin\Release\TEST.exe
+C:\Users\Parrish\Documents\GitHub\TEST\TEST\TEST\bin\Release\TEST.pdb
+C:\Users\Parrish\Documents\GitHub\TEST\TEST\TEST\obj\x86\Release\TEST.exe
+C:\Users\Parrish\Documents\GitHub\TEST\TEST\TEST\obj\x86\Release\TEST.pdb

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace TEST
 {
@@ -38,8 +41,8 @@ namespace TEST
             //Console.WriteLine(mathP.GetFactorial(3));
             //Console.Read();
 
-            CurrencyConversion CurrConv = new CurrencyConversion(50.00m);
-            Console.WriteLine(CurrConv.ConvertUSDToEUR(CurrConv.deciAmount));
+            CurrencyConversion CurrConv = new CurrencyConversion(1.00m);
+            Console.WriteLine(CurrConv.ConvertJPYToUSD(1));
             //Console.WriteLine(CurrConv.ConvertPesoToUSD(CurrConv.deciAmount));
 
             Console.Read();
