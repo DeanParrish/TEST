@@ -11,13 +11,15 @@ namespace TEST
     class CurrencyConversion
     {
         public decimal deciAmount { get; set; }
-        XDocument xmlDoc = XDocument.Load("../../Data/ExchangeRates.xml");
+        public XDocument xmlDoc = XDocument.Load("../../Data/ExchangeRates.xml");
+        
         
 
         //GETS RATE OF EURO TO CALLED CURRENCY && ALL CREDIT TO ECB
-        private decimal QueryBuilder(string curr)
+        private decimal GetCurrRate(string curr)
         {
             decimal retValue = 0;
+            xmlDoc = RemoveAllNamespaces(xmlDoc.ToString());
             var GetDeciRate = from todayDate in xmlDoc.Descendants("Cube")
                               where (string)todayDate.Attribute("currency") == curr
                               select todayDate.Attribute("rate").Value;
@@ -26,164 +28,59 @@ namespace TEST
             {
                 retValue = decimal.Parse(item);
             }
-
+            
             return retValue;
         }
+        //CONSTRUCTOR; SETS AMOUNT PROPTERTY
         public CurrencyConversion(decimal amt)
         {
             deciAmount = amt;
             
         }
-
-        public decimal ConvertUSDToEUR(decimal amt)
+        //GETS inCurr IN EUR SINCE STANDARD IS EUR IN THIS CASE; THEN CONVERTS TO outCurr
+        public decimal Convert(decimal amt, string inCurr, string outCurr)
         {
             try
             {
-                decimal deciEUR = 0;
-                decimal deciRate = QueryBuilder("USD");
-
-                deciEUR = amt * (1 / deciRate);
-
-                return Math.Round(deciEUR, 2);
+                decimal deciRetCurr = 0;
+                decimal deciRate = GetCurrRate(outCurr);
                 
+                deciRetCurr = amt * ((1 / GetCurrRate(inCurr)) * deciRate);
 
+                return Math.Round(deciRetCurr, 2);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return 0;
             }
-            
+           
         }
 
-        public decimal ConvertEURToUSD(decimal amt)
+        public XDocument RemoveAllNamespaces(string xmlDocument)
         {
-            try
-            {
-                decimal deciUSD = 0;
-                decimal deciRate = QueryBuilder("USD");
+            XElement xmlDocumentWithoutNs = RemoveAllNamespaces(XElement.Parse(xmlDocument));
 
-                deciUSD = amt * deciRate;
+            XDocument xmlDocumentRet = new XDocument();
 
-                return Math.Round(deciUSD, 2);
+            xmlDocumentRet.Add(xmlDocumentWithoutNs);
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return 0;
-                
-            }
+            return xmlDocumentRet;
         }
 
-        public decimal ConcertUSDToMXN(decimal amt)
+        private static XElement RemoveAllNamespaces(XElement xmlDocument)
         {
-            try
+            if (!xmlDocument.HasElements)
             {
-                decimal deciPeso;
-                decimal deciRate = QueryBuilder("USD");
- 
-                deciPeso = (amt * (QueryBuilder("MXN")*(1 / deciRate)));
+                XElement xElement = new XElement(xmlDocument.Name.LocalName);
+                xElement.Value = xmlDocument.Value;
 
-                return Math.Round(deciPeso, 2);
+                foreach (XAttribute attribute in xmlDocument.Attributes())
+                    xElement.Add(attribute);
+
+                return xElement;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return 0;
-            }
-        }
-
-        public decimal ConvertMXNToUSD(decimal amt)
-        {
-            try
-            {
-                decimal deciUSD;
-                decimal deciRate = QueryBuilder("USD");
-
-                deciUSD = amt / (QueryBuilder("MXN")*(1/deciRate));
-
-                return Math.Round(deciUSD, 2);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return 0;
-            }
-        }
-
-        public decimal ConvertEURToJPY(decimal amt)
-        {
-            try
-            {
-                decimal deciJPY;
-                decimal deciRate = QueryBuilder("JPY");
-
-                deciJPY = amt * deciRate;
-
-                return Math.Round(deciJPY, 2);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return 0;
-               
-            }
-        }
-
-        public decimal ConvertJPYToEUR(decimal amt)
-        {
-            try
-            {
-                decimal deciEUR;
-                decimal deciRate = QueryBuilder("JPY");
-
-                deciEUR = amt / deciRate;
-
-                return Math.Round(deciEUR, 2);
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine(e.Message);
-                return 0;
-            }
-        }
-
-        public decimal ConvertUSDToJPY(decimal amt)
-        {
-            try
-            {
-                decimal deciJPY;
-                decimal deciRate = QueryBuilder("JPY");
-
-                deciJPY = (amt * (1 / QueryBuilder("USD"))) * deciRate;
-
-                return Math.Round(deciJPY, 2);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return 0;
-            }
-        }
-
-        public decimal ConvertJPYToUSD(decimal amt)
-        {
-            try
-            {
-                decimal deciUSD;
-                decimal deciRate = QueryBuilder("USD");
-
-                deciUSD = (amt * (1 / QueryBuilder("JPY")) * deciRate);
-
-                return Math.Round(deciUSD, 2);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return 0;
-            }
+            return new XElement(xmlDocument.Name.LocalName, xmlDocument.Elements().Select(el => RemoveAllNamespaces(el)));
         }
     }
 }

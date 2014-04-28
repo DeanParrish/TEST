@@ -42,7 +42,7 @@ namespace TEST
             //Console.Read();
 
             CurrencyConversion CurrConv = new CurrencyConversion(1.00m);
-            Console.WriteLine(CurrConv.ConvertJPYToUSD(1));
+            Console.WriteLine(CurrConv.Convert(1, "USD", "RUB"));
             //Console.WriteLine(CurrConv.ConvertPesoToUSD(CurrConv.deciAmount));
 
             Console.Read();
