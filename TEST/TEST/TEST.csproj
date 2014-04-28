@@ -52,6 +52,8 @@
     <Compile Include="ListMethods.cs" />
     <Compile Include="FibonacciList.cs" />
     <Compile Include="StringIterator.cs" />
+    <Compile Include="FileUpdate.cs" />
+    <Compile Include="XMLMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\ExchangeRates.xml">

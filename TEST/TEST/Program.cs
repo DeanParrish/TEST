@@ -41,8 +41,9 @@ namespace TEST
             //Console.WriteLine(mathP.GetFactorial(3));
             //Console.Read();
 
-            CurrencyConversion CurrConv = new CurrencyConversion(1.00m);
+            CurrencyConversion CurrConv = new CurrencyConversion(1.00m, "../../Data/ExchangeRates.xml");
             Console.WriteLine(CurrConv.Convert(1, "USD", "RUB"));
+            //CurrConv.UpdateFile();
             //Console.WriteLine(CurrConv.ConvertPesoToUSD(CurrConv.deciAmount));
 
             Console.Read();

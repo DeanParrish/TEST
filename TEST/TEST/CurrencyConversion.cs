@@ -4,22 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using System.Net;
+using System.IO;
 
 
 namespace TEST
 {
     class CurrencyConversion
     {
-        public decimal deciAmount { get; set; }
-        public XDocument xmlDoc = XDocument.Load("../../Data/ExchangeRates.xml");
-        
+        private decimal deciAmount { get; set; }
+        XDocument xmlDoc;
         
 
-        //GETS RATE OF EURO TO CALLED CURRENCY && ALL CREDIT TO ECB
+        //GETS RATE OF EURO TO CALLED CURRENCY && ALL CREDIT TO ECB FOR UPDATED XML FILE
         private decimal GetCurrRate(string curr)
         {
+            XMLMethods xmlMTD = new XMLMethods();
+            xmlDoc = xmlMTD.RemoveAllNamespaces(xmlDoc.ToString());
+            
             decimal retValue = 0;
-            xmlDoc = RemoveAllNamespaces(xmlDoc.ToString());
+            
             var GetDeciRate = from todayDate in xmlDoc.Descendants("Cube")
                               where (string)todayDate.Attribute("currency") == curr
                               select todayDate.Attribute("rate").Value;
@@ -32,9 +36,10 @@ namespace TEST
             return retValue;
         }
         //CONSTRUCTOR; SETS AMOUNT PROPTERTY
-        public CurrencyConversion(decimal amt)
+        public CurrencyConversion(decimal amt, string path)
         {
             deciAmount = amt;
+            xmlDoc = XDocument.Load(path);
             
         }
         //GETS inCurr IN EUR SINCE STANDARD IS EUR IN THIS CASE; THEN CONVERTS TO outCurr
@@ -57,30 +62,18 @@ namespace TEST
            
         }
 
-        public XDocument RemoveAllNamespaces(string xmlDocument)
+        //UPDATES FILE USING FILEUPDATE CLASS
+        public void UpdateFile()
         {
-            XElement xmlDocumentWithoutNs = RemoveAllNamespaces(XElement.Parse(xmlDocument));
-
-            XDocument xmlDocumentRet = new XDocument();
-
-            xmlDocumentRet.Add(xmlDocumentWithoutNs);
-
-            return xmlDocumentRet;
-        }
-
-        private static XElement RemoveAllNamespaces(XElement xmlDocument)
-        {
-            if (!xmlDocument.HasElements)
+            FileUpdate fileUp = new FileUpdate();
+            try
             {
-                XElement xElement = new XElement(xmlDocument.Name.LocalName);
-                xElement.Value = xmlDocument.Value;
-
-                foreach (XAttribute attribute in xmlDocument.Attributes())
-                    xElement.Add(attribute);
-
-                return xElement;
+                fileUp.UpdateFile("../../Data/ExchangeRates.xml", fileUp.DownloadUpdate("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"));
             }
-            return new XElement(xmlDocument.Name.LocalName, xmlDocument.Elements().Select(el => RemoveAllNamespaces(el)));
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }         
         }
     }
 }
