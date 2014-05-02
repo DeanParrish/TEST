@@ -38,6 +38,7 @@
 			<Cube currency='SGD' rate='1.7407'/>
 			<Cube currency='THB' rate='44.695'/>
 			<Cube currency='ZAR' rate='14.7439'/>
+      <Cube currency='EUR' rate='1'/>
 		</Cube>
 	</Cube>
 </gesmes:Envelope>
