@@ -8,7 +8,7 @@ using ClassLibrary1;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-
+using System.Threading.Tasks;
 
 
 
@@ -17,16 +17,17 @@ public partial class CurrencyConversion : System.Web.UI.Page
     XDocument xmlDoc = XDocument.Load(HttpContext.Current.Server.MapPath("~/App_Data/ExchangeRates.xml"));
     ClassLibrary1.CCLibrary xx = new ClassLibrary1.CCLibrary(50, HttpContext.Current.Server.MapPath("~/App_Data/ExchangeRates.xml"));
     string[,] array = new string[,] { { "currency", "EUR", "rate", "1" }};
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
            // AppendElementXML(HttpContext.Current.Server.MapPath("~/App_Data/ExchangeRates.xml"), array);
+            
             PopulateDDLFromXML(HttpContext.Current.Server.MapPath("~/App_Data/ExchangeRates.xml"), "currency", ddlCurrency1);
             PopulateDDLFromXML(HttpContext.Current.Server.MapPath("~/App_Data/ExchangeRates.xml"), "currency", ddlCurrency2);
             xx.UpdateFile(HttpContext.Current.Server.MapPath("~/App_Data/ExchangeRates.xml"), "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
-           
         }  
     }
     private void AppendElementXML(string path, string[,] arr)
