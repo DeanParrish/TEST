@@ -71,7 +71,7 @@ public partial class CurrencyConversion : System.Web.UI.Page
         catch (Exception ex)
         {
             lblResult.Text = "ERROR";
-            
+            System.Diagnostics.Debug.WriteLine(ex);
         }
         
     }
